@@ -1,7 +1,16 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	Row,
+	Col,
+	Image,
+	ListGroup,
+	Card,
+	Button,
+	Form,
+} from 'react-bootstrap';
 
 // actions
 import { listProductDetails } from '../actions/productActions';
@@ -11,9 +20,12 @@ import Rating from '../components/Rating';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-const Product = () => {
+const Product = ({ history }) => {
+	const [qty, setQty] = useState(1);
+
 	const { id } = useParams();
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const productDetails = useSelector((state) => state.productDetails);
 	const { loading, error, product } = productDetails;
@@ -21,6 +33,10 @@ const Product = () => {
 	useEffect(() => {
 		dispatch(listProductDetails(id));
 	}, [dispatch, id]);
+
+	const addToCartHandler = () => {
+		navigate(`/cart/${id}?qty=${qty}`);
+	};
 
 	return (
 		<>
@@ -73,9 +89,34 @@ const Product = () => {
 											</Col>
 										</Row>
 									</ListGroup.Item>
+
+									{product.countInStock > 0 && (
+										<ListGroup.Item>
+											<Row>
+												<Col>Qty</Col>
+												<Col>
+													<Form.Select
+														as='select'
+														value={qty}
+														onChange={(e) => setQty(e.target.value)}
+													>
+														{[...Array(product.countInStock).keys()].map(
+															(x) => (
+																<option key={x + 1} value={x + 1}>
+																	{x + 1}
+																</option>
+															)
+														)}
+													</Form.Select>
+												</Col>
+											</Row>
+										</ListGroup.Item>
+									)}
+
 									<ListGroup.Item>
 										<div className='d-grid gap-2'>
 											<Button
+												onClick={addToCartHandler}
 												variant='primary'
 												size='md'
 												disabled={product.countInStock === 0}
