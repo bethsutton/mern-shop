@@ -42,7 +42,7 @@ const Profile = ({ history }) => {
 				setEmail(user.email);
 			}
 		}
-	}, [dispatch, navigate, userInfo, user]);
+	}, [dispatch, navigate, userInfo, user, success]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();

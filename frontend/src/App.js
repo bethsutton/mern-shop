@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
+import Shipping from './pages/Shipping';
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 						<Route path='/product/:id' element={<Product />} />
 						<Route path='/cart/:id' element={<Cart />} />
 						<Route path='/cart/' element={<Cart />} />
+						<Route path='/shipping' element={<Shipping />} />
 
 						<Route path='/search/:keyword' element={<Home />} />
 						<Route path='/page/:pageNumber' element={<Home />} />
