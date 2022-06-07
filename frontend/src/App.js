@@ -12,6 +12,7 @@ import Product from './pages/Product';
 import Cart from './pages/Cart';
 import Shipping from './pages/Shipping';
 import Payment from './pages/Payment';
+import PlaceOrder from './pages/PlaceOrder';
 
 function App() {
 	return (
@@ -28,6 +29,7 @@ function App() {
 						<Route path='/cart/' element={<Cart />} />
 						<Route path='/shipping' element={<Shipping />} />
 						<Route path='/payment' element={<Payment />} />
+						<Route path='/placeorder' element={<PlaceOrder />} />
 
 						<Route path='/search/:keyword' element={<Home />} />
 						<Route path='/page/:pageNumber' element={<Home />} />
