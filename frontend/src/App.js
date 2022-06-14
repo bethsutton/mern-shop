@@ -13,6 +13,7 @@ import Cart from './pages/Cart';
 import Shipping from './pages/Shipping';
 import Payment from './pages/Payment';
 import PlaceOrder from './pages/PlaceOrder';
+import Order from './pages/Order';
 
 function App() {
 	return (
@@ -30,6 +31,7 @@ function App() {
 						<Route path='/shipping' element={<Shipping />} />
 						<Route path='/payment' element={<Payment />} />
 						<Route path='/placeorder' element={<PlaceOrder />} />
+						<Route path='/order/:id' element={<Order />} />
 
 						<Route path='/search/:keyword' element={<Home />} />
 						<Route path='/page/:pageNumber' element={<Home />} />
