@@ -10,14 +10,14 @@ const Payment = ({ history }) => {
 	const cart = useSelector((state) => state.cart);
 	const { shippingAddress } = cart;
 
-	if (!shippingAddress) {
-		navigate('/shipping');
-	}
-
 	const [paymentMethod, setPaymentMethod] = useState('PayPal');
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	if (!shippingAddress) {
+		navigate('/shipping');
+	}
 
 	const submitHandler = (e) => {
 		e.preventDefault();
