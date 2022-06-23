@@ -7,7 +7,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { listUsers } from '../actions/userActions';
 
-const UserList = ({ history }) => {
+const UserList = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
