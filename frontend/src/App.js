@@ -15,6 +15,7 @@ import Payment from './pages/Payment';
 import PlaceOrder from './pages/PlaceOrder';
 import Order from './pages/Order';
 import UserList from './pages/UserList';
+import UserEdit from './pages/UserEdit';
 
 function App() {
 	return (
@@ -35,6 +36,7 @@ function App() {
 						<Route path='/order/:id' element={<Order />} />
 
 						<Route path='/admin/userlist' element={<UserList />} />
+						<Route path='/admin/user/:id/edit' element={<UserEdit />} />
 
 						<Route path='/search/:keyword' element={<Home />} />
 						<Route path='/page/:pageNumber' element={<Home />} />
