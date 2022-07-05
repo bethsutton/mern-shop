@@ -21,8 +21,8 @@ const Header = () => {
 				<Container>
 					<LinkContainer to='/'>
 						<Navbar.Brand className='fs-3'>
-							<i className='fas fa-paw mx-2 text-primary'></i>
-							Pet Gear
+							<i className='fas fa-shop mx-2 text-primary'></i>
+							MERN Shop
 						</Navbar.Brand>
 					</LinkContainer>
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
