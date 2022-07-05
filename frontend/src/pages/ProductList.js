@@ -49,7 +49,7 @@ const ProductList = () => {
 		}
 
 		if (successCreate) {
-			navigate(`/admin/product/${createdProduct._id}/edit`);
+			navigate(`/admin/product/${createdProduct.id}/edit`);
 		} else {
 			dispatch(listProducts());
 		}
