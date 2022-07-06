@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
-import { listProductDetails } from '../actions/productActions';
+import { listProductDetails, updateProduct } from '../actions/productActions';
+import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
 
 const ProductEdit = () => {
 	const { id } = useParams();
@@ -27,31 +28,46 @@ const ProductEdit = () => {
 	const productDetails = useSelector((state) => state.productDetails);
 	const { loading, error, product } = productDetails;
 
-	// const productUpdate = useSelector((state) => state.productUpdate)
-	// const {
-	//   loading: loadingUpdate,
-	//   error: errorUpdate,
-	//   success: successUpdate,
-	// } = productUpdate
+	const productUpdate = useSelector((state) => state.productUpdate);
+	const {
+		loading: loadingUpdate,
+		error: errorUpdate,
+		success: successUpdate,
+	} = productUpdate;
 
 	useEffect(() => {
-		console.log(id);
-		if (!product.name || product._id !== id) {
-			dispatch(listProductDetails(id));
+		if (successUpdate) {
+			dispatch({ type: PRODUCT_UPDATE_RESET });
+			navigate('/admin/productlist');
 		} else {
-			setName(product.name);
-			setPrice(product.price);
-			setImage(product.image);
-			setBrand(product.brand);
-			setCategory(product.category);
-			setCountInStock(product.countInStock);
-			setDescription(product.description);
+			if (!product.name || product._id !== id) {
+				dispatch(listProductDetails(id));
+			} else {
+				setName(product.name);
+				setPrice(product.price);
+				setImage(product.image);
+				setBrand(product.brand);
+				setCategory(product.category);
+				setCountInStock(product.countInStock);
+				setDescription(product.description);
+			}
 		}
-	}, [dispatch, id, product]);
+	}, [dispatch, id, product, successUpdate, navigate]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		// UPDATE PRODUCT
+		dispatch(
+			updateProduct({
+				_id: id,
+				name,
+				price,
+				image,
+				brand,
+				category,
+				description,
+				countInStock,
+			})
+		);
 	};
 
 	return (
@@ -61,8 +77,8 @@ const ProductEdit = () => {
 			</Link>
 			<FormContainer>
 				<h1>Edit Product</h1>
-				{/* {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>} */}
+				{loadingUpdate && <Loader />}
+				{errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
 				{loading ? (
 					<Loader />
 				) : error ? (
